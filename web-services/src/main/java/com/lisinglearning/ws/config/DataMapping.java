@@ -1,8 +1,10 @@
 package com.lisinglearning.ws.config;
 
 import com.lisinglearning.commons.dto.AddressInfo;
+import com.lisinglearning.commons.dto.PostInfo;
 import com.lisinglearning.commons.dto.UserInfo;
 import com.lisinglearning.commons.entities.Address;
+import com.lisinglearning.commons.entities.Post;
 import com.lisinglearning.commons.entities.User;
 import com.lisinglearning.paging.DataMapper;
 import ma.glasnost.orika.MapperFactory;
@@ -25,10 +27,14 @@ public class DataMapping {
         MapperFactory mapperFactory = dataMapper.getMapperFactory();
 
         mapperFactory.classMap(User.class, UserInfo.class)
-                //.exclude("product")
                 .field("address", "addressInfo")
                 .field("address.geo","addressInfo.geoInfo")
                 .field("company", "companyInfo")
+                .byDefault()
+                .register();
+
+        mapperFactory.classMap(Post.class, PostInfo.class)
+                .field("user", "userInfo")
                 .byDefault()
                 .register();
     }

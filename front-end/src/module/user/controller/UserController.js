@@ -12,9 +12,9 @@
 		
 		angular.extend(userController, {
 						users: [],
-						currentPage : 0,
+						currentPage : 1,
 						totalElements : 0,
-						pageSize : 4
+						pageSize : 8
 		});
 		
 		/**
@@ -24,7 +24,6 @@
 			UserService.get({size: userController.pageSize, page: userController.currentPage -1}, function(response){
 				userController.users = response.results;
 				userController.totalElements =  response.totalElements;
-				userController.currentPage = response.currentPage + 1;
 			},function(error){
 				$log.debug(error.status + " " + error.statusText);
 			});

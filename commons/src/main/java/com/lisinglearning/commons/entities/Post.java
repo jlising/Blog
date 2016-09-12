@@ -11,7 +11,8 @@ public class Post extends AbstractEntity {
     private String title;
     private String body;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    //Use merge since post cannot be created without a user
+    @ManyToOne(cascade = CascadeType.MERGE)//http://stackoverflow.com/questions/13370221/jpa-hibernate-detached-entity-passed-to-persist
     @JoinColumn(name = "user_id")
     private User user;
 

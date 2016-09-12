@@ -13,7 +13,7 @@
 		var methods = {
 				'get' : {
 					method : 'GET',
-					isArray : true
+					isArray : false
 				}
 		};
 		

@@ -1,6 +1,7 @@
 package com.lisinglearning.commons.entities;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by 124032 on 9/8/2016.
@@ -22,6 +23,9 @@ public class User extends AbstractEntity {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "company_id")
     private Company company;
+
+    //@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+    //private Set<Post> posts;
 
     public String getName() {
         return name;
@@ -86,4 +90,12 @@ public class User extends AbstractEntity {
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
     }
+
+    //public Set<Post> getPosts() {
+    //    return posts;
+    //}
+
+   // public void setPosts(Set<Post> posts) {
+    //    this.posts = posts;
+   // }
 }
