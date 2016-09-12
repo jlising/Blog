@@ -1,0 +1,33 @@
+<div class="container">
+	 <div class="row">
+	 <h3 class="page-title">Users</h3>
+
+	 <div class="pagination">
+		 <ul uib-pagination data-max-size="userController.pageSize" data-total-items="userController.totalElements" data-ng-model="userController.currentPage"></ul>
+	 </div>
+	 <div class="clearfix"></div>
+	 <div class="col-xs-11 col-sm-5 col-md-3 col-lg-3" data-ng-repeat="user in userController.users">
+	 
+	 	<article class="col-item">
+	 		<div class="info">
+	 			<div class="row">
+	 				<div class="price-details col-md-6 ">
+	 					<p class="details">
+	 						<img ng-if="user.avatarUrl !== undefined && user.avatarUrl !== '' && user.avatarUrl !== null" class="thumbnail" alt="{{user.name}}" data-ng-src="{{user.avatarUrl}}"/>
+							<img ng-if="user.avatarUrl === undefined || user.avatarUrl === '' || user.avatarUrl === null" class="thumbnail" alt="Avatar" src="./images/avatar.jpg"/>
+						</p>
+	 				</div>
+	 			</div>
+	 			<br>
+	 			<div class="clear-left">
+	 				Name :{{user.name}}<br/>
+					Email : <a href="mailto: {{user.email}}" target="_blank" title="Mail to {{user.email}}">{{user.email}}</a><br/>
+					Website : <a href="{{user.website}}" target="_blank" title="Go to {{user.website}}">{{user.website}}</a><br/>
+					Address : {{user.addressInfo.suite}} {{user.addressInfo.street}} {{user.addressInfo.city}}<br/>
+					Company : {{user.companyInfo.name}}
+	 			</div>
+	 			<div class="clearfix"></div>
+	 		</div>
+	 	</article>
+	 </div>
+ </div>

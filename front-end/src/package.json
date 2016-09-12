@@ -1,0 +1,30 @@
+{
+  "name": "angularjs-app-style-guide",
+  "version": "1.0.0",
+  "description": "Test",
+  "main": "index.js",
+  "devDependencies": {
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-connect": "^5.0.0",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-uglify": "^2.0.0",
+    "http-proxy-middleware": "^0.17.1",
+    "run-sequence": "^1.2.2"
+  },
+  "dependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jesus Lising",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jlising/AngularJs-App-Style-Guide.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jlising/AngularJs-App-Style-Guide/issues"
+  },
+  "homepage": "https://github.com/jlising/AngularJs-App-Style-Guide#readme"
+}
