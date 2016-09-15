@@ -9,10 +9,16 @@
 	
 	function routeConfig($stateProvider, $urlRouterProvider){
 		$urlRouterProvider
-	        .when('', '/')	        
+	        .when('', '/')
 	        .otherwise('/page-not-found');
 		
 		$stateProvider
+		    .state('login', {
+                url: '/login',
+                templateUrl: './module/core/view/login/index.html',
+                controller: "LoginController",
+                controllerAs: "loginController"
+            })
 	        .state('404', {
 	            url: '/page-not-found',
 	            templateUrl: './module/core/view/error/404.html'

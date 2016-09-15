@@ -22,7 +22,7 @@ import java.util.Properties;
  */
 @PropertySource("classpath:db.properties")
 @Configuration
-@EnableJpaRepositories(basePackages = "com.lisinglearning")
+@EnableJpaRepositories(basePackages = "com.lisinglearning.**.dao")
 @EnableTransactionManagement
 public class DaoConfig {
 

@@ -5,11 +5,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRegistration;
+import javax.servlet.*;
+import java.util.EnumSet;
 
 public class AppInitializer implements WebApplicationInitializer {
 	
@@ -27,9 +27,9 @@ public class AppInitializer implements WebApplicationInitializer {
 		container.addListener(new ContextLoaderListener(context));
 
 		//Configure security layer
-		//FilterRegistration.Dynamic springSecFilter = container.addFilter("springSecurityFilterChain", DelegatingFilterProxy.class);
-		//springSecFilter.setAsyncSupported(true);
-		//springSecFilter.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST, DispatcherType.ASYNC), true, "/*");
+		FilterRegistration.Dynamic springSecFilter = container.addFilter("springSecurityFilterChain", DelegatingFilterProxy.class);
+		springSecFilter.setAsyncSupported(true);
+		springSecFilter.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST, DispatcherType.ASYNC), true, "/*");
 
 		//Set dispatchers
 		ServletRegistration.Dynamic mvcDispatcher = container.addServlet("dispatcher", new DispatcherServlet(context));
