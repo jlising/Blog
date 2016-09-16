@@ -21,7 +21,7 @@
 		 * Get the posts
 		 */
 		postsController.getPosts = function(){
-			PostsService.get({size: postsController.pageSize, page: postsController.currentPage -1}, function(response){
+			PostsService.get({size: postsController.pageSize, page: postsController.currentPage}, function(response){
                 postsController.posts = response.results;
                 postsController.totalElements =  response.totalElements;
 

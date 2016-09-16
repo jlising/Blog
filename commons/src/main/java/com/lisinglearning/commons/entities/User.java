@@ -1,6 +1,7 @@
 package com.lisinglearning.commons.entities;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -11,10 +12,16 @@ import java.util.Set;
 public class User extends AbstractEntity {
     private String name;
     private String username;
+    private String password;
+    private boolean enabled = true;
+
     private String email;
     private String phone;
     private String website;
     private String avatarUrl;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private Set<UserRole> userRole = new HashSet<UserRole>(0);
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
@@ -26,6 +33,23 @@ public class User extends AbstractEntity {
 
     //@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
     //private Set<Post> posts;
+
+    public User() {
+    }
+
+    public User(String username, String password, boolean enabled) {
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+    }
+
+    public User(String username, String password,
+                boolean enabled, Set<UserRole> userRole) {
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.userRole = userRole;
+    }
 
     public String getName() {
         return name;
@@ -41,6 +65,22 @@ public class User extends AbstractEntity {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getEmail() {
@@ -91,11 +131,11 @@ public class User extends AbstractEntity {
         this.avatarUrl = avatarUrl;
     }
 
-    //public Set<Post> getPosts() {
-    //    return posts;
-    //}
+    public Set<UserRole> getUserRole() {
+        return this.userRole;
+    }
 
-   // public void setPosts(Set<Post> posts) {
-    //    this.posts = posts;
-   // }
+    public void setUserRole(Set<UserRole> userRole) {
+        this.userRole = userRole;
+    }
 }

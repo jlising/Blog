@@ -16,9 +16,8 @@ import javax.persistence.EntityManagerFactory;
 import java.sql.SQLException;
 import java.util.Properties;
 
-
 /**
- * Created by jlising on 1/25/16.
+ * Data Access Object configuration
  */
 @PropertySource("classpath:db.properties")
 @Configuration

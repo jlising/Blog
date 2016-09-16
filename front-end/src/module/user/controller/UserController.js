@@ -21,7 +21,7 @@
 		 * Get the user thumbnails
 		 */
 		userController.getUsers = function(){
-			UserService.get({size: userController.pageSize, page: userController.currentPage -1}, function(response){
+			UserService.get({size: userController.pageSize, page: userController.currentPage}, function(response){
 				userController.users = response.results;
 				userController.totalElements =  response.totalElements;
 			},function(error){

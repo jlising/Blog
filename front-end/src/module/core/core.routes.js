@@ -9,7 +9,8 @@
 	
 	function routeConfig($stateProvider, $urlRouterProvider){
 		$urlRouterProvider
-	        .when('', '/')
+	        .when('', '/posts')
+	        .when('/', '/posts')
 	        .otherwise('/page-not-found');
 		
 		$stateProvider
@@ -18,6 +19,17 @@
                 templateUrl: './module/core/view/login/index.html',
                 controller: "LoginController",
                 controllerAs: "loginController"
+            })
+            .state('logout', {
+                url: '/logout',
+                controller: ['LoginService', '$log','$rootScope', function(LoginService, $log, $rootScope){
+                        LoginService.logout({},function(response){
+                                                    $log.debug("Successful logout");
+                                                    $rootScope.$broadcast("logout-success");
+                                                },function(error){
+                                                    $log.debug(error.status + " " + error.statusText);
+                                                });
+                }]
             })
 	        .state('404', {
 	            url: '/page-not-found',

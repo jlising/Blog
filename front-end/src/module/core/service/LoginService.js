@@ -16,7 +16,13 @@
 					params : { username : '@username', password : '@password'}
 					//isArray : true
 					//headers: {'X-CSRF-TOKEN': 'anything'}
-				}
+				},
+				'logout' : {
+                    method : 'POST',
+                    url : ENVIRONMENT.proxyUrl + "/logout"
+                    //isArray : true
+                    //headers: {'X-CSRF-TOKEN': 'anything'}
+                }
 		};
 		
 		//Return new object. Passed arguments will be catch in .apply()

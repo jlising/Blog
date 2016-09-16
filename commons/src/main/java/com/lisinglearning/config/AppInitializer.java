@@ -11,6 +11,9 @@ import org.springframework.web.servlet.DispatcherServlet;
 import javax.servlet.*;
 import java.util.EnumSet;
 
+/**
+ * Web application initializer
+ */
 public class AppInitializer implements WebApplicationInitializer {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(AppInitializer.class);
@@ -20,18 +23,20 @@ public class AppInitializer implements WebApplicationInitializer {
 		
 		AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
 		
-		// Set configuration scans
+		//Scan configuration classes annotated with @Configuration
+        //Beware of precedence
 		context.scan("com.lisinglearning.config");
 		context.scan("com.lisinglearning.**.config");
 
 		container.addListener(new ContextLoaderListener(context));
 
-		//Configure security layer
+		//Integrate security layer
+        //Security config is separated to avoid conflict in orders
 		FilterRegistration.Dynamic springSecFilter = container.addFilter("springSecurityFilterChain", DelegatingFilterProxy.class);
 		springSecFilter.setAsyncSupported(true);
 		springSecFilter.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST, DispatcherType.ASYNC), true, "/*");
 
-		//Set dispatchers
+		//MVC dispatcher
 		ServletRegistration.Dynamic mvcDispatcher = container.addServlet("dispatcher", new DispatcherServlet(context));
 		mvcDispatcher.setLoadOnStartup(1);
 		mvcDispatcher.addMapping("/");

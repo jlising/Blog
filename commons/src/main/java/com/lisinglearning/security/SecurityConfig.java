@@ -4,6 +4,7 @@ import com.lisinglearning.security.RESTAuthenticationEntryPoint;
 import com.lisinglearning.security.RESTAuthenticationFailureHandler;
 import com.lisinglearning.security.RESTAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -16,6 +17,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.csrf.CsrfFilter;
 
 /**
@@ -35,13 +39,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private RESTAuthenticationSuccessHandler authenticationSuccessHandler;
 
+    @Autowired
+    private RESTLogoutSuccessHandler restLogoutSuccessHandler;
+
+    @Autowired
+    @Qualifier("userDetailsService")
+    UserDetailsService userDetailsService;
+
     @Override
     protected void configure(AuthenticationManagerBuilder builder) throws Exception {
-       builder.inMemoryAuthentication()
-                .withUser("user").password("user").roles("USER")
-                .and()
-                .withUser("admin")
-                .password("admin").roles("ADMIN");
+        builder.userDetailsService(userDetailsService);//.passwordEncoder(passwordEncoder());
     }
 
     @Override
@@ -59,9 +66,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin().successHandler(authenticationSuccessHandler);
         http.formLogin().failureHandler(authenticationFailureHandler);
 
-        http.logout().logoutSuccessUrl("/login?logout");
+        http.logout().logoutSuccessHandler(restLogoutSuccessHandler); //.logoutSuccessUrl("/login?logout");
 
         // CSRF tokens handling
         //http.addFilterAfter(new CsrfTokenResponseHeaderBindingFilter(), CsrfFilter.class);
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        return encoder;
     }
 }

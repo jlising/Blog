@@ -21,6 +21,9 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import javax.annotation.PostConstruct;
 import java.util.List;
 
+/**
+ * MVC configuration
+ */
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement

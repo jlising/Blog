@@ -6,6 +6,9 @@ import ma.glasnost.orika.impl.DefaultMapperFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Orika Mapper configuration
+ */
 @Configuration
 public class DataMappingConfig {
 	@Bean

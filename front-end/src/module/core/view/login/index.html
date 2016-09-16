@@ -1,5 +1,15 @@
-<form id="loginform">
-    <label for="username">Username: </label><input id="username" data-ng-model="loginController.username"><br/>
-    <label for="password">Password:</label><input id="password" data-ng-model="loginController.password"><br/>
-    <button data-ng-click="loginController.login()">Login</button>
-</form>
+<div class="container" style="width:300px">
+    <form class="form-signin">
+        <h2 class="form-signin-heading">Please log in</h2>
+        <label for="inputUsername" class="sr-only">Username</label>
+        <input data-ng-model="loginController.username" type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input data-ng-model="loginController.password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+            <label style="line-height: 20px">
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="button" data-ng-click="loginController.login()">LOGIN</button>
+    </form>
+</div>
